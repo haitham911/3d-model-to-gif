@@ -1,0 +1,19 @@
+{
+    "name": "three-model-to-gif",
+    "version": "1.0.0",
+    "description": "Convert 3D models to animated GIFs",
+    "main": "index.js",
+    "scripts": {
+        "start": "vite",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "gif.js": "^0.2.0",
+        "puppeteer": "^24.9.0",
+        "three": "^0.150.0",
+        "yargs": "^17.7.2"
+    },
+    "devDependencies": {
+        "vite": "^4.5.1"
+    }
+}

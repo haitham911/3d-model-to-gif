@@ -1,0 +1,74 @@
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build directories
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Generated files
+*.gif
+*.png
+*.jpg
+*.jpeg
+!src/assets/*.png
+!src/assets/*.jpg
+!src/assets/*.jpeg
+!public/*.png
+!public/*.jpg
+!public/*.jpeg
+
+# Temporary files
+.tmp/
+tmp/
+temp/
+
+# Generated TypeScript types
+*.d.ts
+
+# Production bundle stats
+stats.json
+
+# GIF worker files copied by build tools
+gif.worker.js.map
+gif.worker.js
+
+# Model files - optional, remove if you want to track models in git
+*.glb
+*.gltf
+*.obj
+*.mtl
+*.fbx
+# If you want to track specific demo models, add exceptions:
+# !public/models/example.glb
+
+# URL resource maps
+resource-map.json
+
+# Coverage directory
+coverage/

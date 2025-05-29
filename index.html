@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model to GIF Converter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-section {
+            flex: 2;
+            min-width: 400px;
+            position: relative;
+        }
+
+        #model-preview {
+            width: 100%;
+            height: 400px;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .upload-container {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .upload-container.drag-over {
+            background-color: #ecf0f1;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .btn-download {
+            background-color: #2ecc71;
+        }
+
+        .btn-download:hover {
+            background-color: #27ae60;
+        }
+
+        #file-name {
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .options-section {
+            margin-top: 20px;
+        }
+
+        .option-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gif-preview {
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .gif-preview img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            background-color: #fadbd8;
+            display: none;
+        }
+
+        .info-text {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        #model-scale {
+            width: 100%;
+        }
+
+        #scale-value {
+            display: inline-block;
+            width: 40px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>3D Model to GIF Converter</h1>
+            <p>Upload a 3D model, preview it, and convert it to an animated GIF</p>
+        </header>
+
+        <div class="main-content">
+            <div class="upload-section">
+                <div class="upload-container" id="drop-area">
+                    <p>Drop your 3D model here or</p>
+                    <label for="file-input" class="btn">Choose File</label>
+                    <input type="file" id="file-input" accept=".glb,.gltf,.obj">
+                    <p id="file-name">No file selected</p>
+                </div>
+
+                <div class="options-section">
+                    <div class="option-group">
+                        <label for="frame-count">Number of Frames:</label>
+                        <input type="number" id="frame-count" class="form-control" value="36" min="10" max="120">
+                        <p class="info-text">More frames = smoother animation but larger file size</p>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="image-size">Image Size:</label>
+                        <select id="image-size" class="form-control">
+                            <option value="256">256x256 (Small)</option>
+                            <option value="400" selected>400x400 (Medium)</option>
+                            <option value="512">512x512 (Large)</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="background-color">Background Color:</label>
+                        <input type="color" id="background-color" class="form-control" value="#ffffff">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="model-scale">Model Scale:</label>
+                        <input type="range" id="model-scale" min="0.1" max="3" step="0.1" value="1">
+                        <span id="scale-value">1.0</span>
+                    </div>
+                </div>
+
+                <div class="progress-container" id="progress-container">
+                    <p>Generating GIF...</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar"></div>
+                    </div>
+                    <p id="progress-text">0%</p>
+                </div>
+
+                <div class="error-message" id="error-message"></div>
+
+                <div class="controls">
+                    <button id="generate-btn" class="btn" disabled>Generate GIF</button>
+                    <a id="download-link" class="btn btn-download" style="display: none;">Download GIF</a>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div id="model-preview"></div>
+
+                <div class="gif-preview" id="gif-preview">
+                    <h3>GIF Preview</h3>
+                    <img id="gif-result" src="" alt="Generated GIF">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load your bundled script -->
+    <script type="module" src="/index.js"></script>
+</body>
+
+</html>
