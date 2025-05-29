@@ -2,7 +2,7 @@
 
 A web-based tool for converting 3D models into animated GIF files with smooth rotation.
 
-![Example 3D model converted to GIF](public/examples/model.gif)
+![Example 3D model converted to GIF](images/model.gif)
 
 ## Features
 
