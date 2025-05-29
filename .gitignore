@@ -32,7 +32,6 @@ debug.log
 .DS_Store
 
 # Generated files
-*.gif
 *.png
 *.jpg
 *.jpeg
@@ -42,6 +41,11 @@ debug.log
 !public/*.png
 !public/*.jpg
 !public/*.jpeg
+
+# Allow GIFs in specific directories
+!images/*.gif
+!public/examples/*.gif
+!src/assets/*.gif
 
 # Temporary files
 .tmp/

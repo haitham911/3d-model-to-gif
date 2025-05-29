@@ -2,6 +2,8 @@
 
 A web-based tool for converting 3D models into animated GIF files with smooth rotation.
 
+![Example 3D model converted to GIF](public/examples/model.gif)
+
 ## Features
 
 - Import 3D models in GLB, GLTF and OBJ formats
