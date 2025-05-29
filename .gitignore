@@ -54,9 +54,7 @@ temp/
 # Production bundle stats
 stats.json
 
-# GIF worker files copied by build tools
-gif.worker.js.map
-gif.worker.js
+
 
 # Model files - optional, remove if you want to track models in git
 *.glb

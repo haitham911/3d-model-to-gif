@@ -582,12 +582,12 @@ document.addEventListener('DOMContentLoaded', () => {
             quality: 10,
             width: imageSize,
             height: imageSize,
-            workerScript: undefined,
+            workerScript: './gif.worker.js', // Correctly points to the public directory
             debug: true,
             dither: false,
             transparent: null,
-            repeat: 0,          // Ensure this is 0 for infinite looping
-            disposal: 2,        // Clean up previous frames completely
+            repeat: 0,
+            disposal: 2,
             background: backgroundColor
         });
 
