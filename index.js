@@ -582,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
             quality: 10,
             width: imageSize,
             height: imageSize,
-            workerScript: './gif.worker.js', // Correctly points to the public directory
+            workerScript: '/gif.worker.js', // Correctly points to the public directory
             debug: true,
             dither: false,
             transparent: null,
